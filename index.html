@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <title>S.S.C ARCHITECTURE</title>
-</head>
-<body>
-  <h1>Custom Furntiture for Interiors Projects</h1>
-  <p>Production- Assembly-Detailing</p>
-</body>
-</html>
 <!doctype html>
 <html lang="tr">
 <head>
@@ -22,15 +11,16 @@
   <style>
     /* ===== Theme: Gri / Nude minimal ===== */
     :root{
-      --bg:#f4f2ef;           /* nude açık gri-bej */
-      --paper:#ffffff;        /* kart zemin */
-      --ink:#1f1f1f;          /* koyu metin */
-      --muted:#6e6b67;        /* ikincil metin */
-      --line:#e6e2dd;         /* ince çizgi */
-      --accent:#b7a696;       /* sıcak nude vurgu */
+      --bg:#f4f2ef;        /* nude açık gri-bej */
+      --paper:#ffffff;     /* kart zemin */
+      --ink:#1f1f1f;       /* koyu metin */
+      --muted:#6e6b67;     /* ikincil metin */
+      --line:#e6e2dd;      /* ince çizgi */
+      --accent:#b7a696;    /* sıcak nude vurgu */
+      --overlay: rgba(0,0,0,.45);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
     a{color:inherit;text-decoration:none}
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
@@ -56,34 +46,47 @@
     .btn{display:inline-block;border:1px solid var(--ink);padding:11px 16px;border-radius:10px}
     .btn.accent{border-color:var(--accent);background:var(--accent);color:#fff;font-weight:700}
 
-    /* Projects */
+    /* Sections */
     .section{padding:56px 0}
     .section h2{font-size:24px;margin:0 0 16px}
+
+    /* Projects grid */
     .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
     @media (max-width:860px){ .grid{grid-template-columns:1fr} }
     .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-    .thumb{aspect-ratio:16/10;background:
-      linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,0)),
-      url('https://images.unsplash.com/photo-1529429612776-c486e33a0385?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;}
-    .thumb.p2{background-image:
-      linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,0)),
-      url('https://images.unsplash.com/photo-1505843513577-22bb7d21e455?q=80&w=1200&auto=format&fit=crop');}
-    .thumb.p3{background-image:
-      linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,0)),
-      url('https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop');}
+    /* Görseller şimdilik boş (sen ekleyeceksin) */
+    .thumb{aspect-ratio:16/10;background:#ddd} /* buraya sonra: background-image:url('...') */
+    .thumb.p2{background:#ddd}
+    .thumb.p3{background:#ddd}
     .card .body{padding:16px}
     .tag{display:inline-block;font-size:12px;color:#fff;background:var(--accent);padding:4px 8px;border-radius:999px;margin-bottom:10px}
     .card h3{margin:0 0 6px}
     .muted{color:var(--muted)}
-    .link{margin-top:auto;padding:14px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
-    .link span{opacity:.8}
+    .link{margin-top:auto;padding:14px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 
     /* About & Contact */
     .about{background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,0))}
     .about p{max-width:780px}
     .contact{display:grid;gap:12px;max-width:520px}
     input,textarea{width:100%;background:#fff;border:1px solid var(--line);padding:12px;border-radius:10px}
+
+    /* Footer */
     footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);text-align:center}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:var(--overlay);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+    .modal-backdrop.open{display:flex}
+    .modal{max-width:980px;width:100%;background:var(--paper);border-radius:16px;border:1px solid var(--line);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+    .modal header{position:relative;background:#fff;border-bottom:1px solid var(--line)}
+    .modal .head{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+    .modal .close{border:0;background:transparent;font-size:28px;cursor:pointer}
+    .modal .content{display:grid;grid-template-columns:1.2fr .8fr}
+    .modal .img{min-height:360px;background:#ddd;/* buraya sonra: background-image:url('...') */ background-position:center;background-size:cover}
+    .modal .body{padding:18px}
+    @media (max-width:860px){
+      .modal .content{grid-template-columns:1fr}
+      .modal .img{aspect-ratio:16/9}
+    }
   </style>
 </head>
 <body>
@@ -127,10 +130,11 @@
             <h3>Beykoz Pazar & Kültür Kompleksi</h3>
             <p class="muted">Pazar + çarşı + kültür birleşimi; kamusal alan kurgusu ve yapısal sistem şemaları.</p>
           </div>
-          <a class="link" href="#" target="_blank" rel="noopener">
+          <div class="link" data-open="p1" role="button" tabindex="0" aria-label="Beykoz projesi detayını aç">
             <span>Projeyi Aç</span> →
-          </a>
+          </div>
         </article>
+
         <!-- Proje 2 -->
         <article class="card">
           <div class="thumb p2"></div>
@@ -139,10 +143,11 @@
             <h3>EcoStep — Kundura Studio</h3>
             <p class="muted">Endüstriyel miras içinde sürdürülebilir malzemelerle stüdyo düzeni.</p>
           </div>
-          <a class="link" href="#" target="_blank" rel="noopener">
+          <div class="link" data-open="p2" role="button" tabindex="0" aria-label="EcoStep projesi detayını aç">
             <span>Projeyi Aç</span> →
-          </a>
+          </div>
         </article>
+
         <!-- Proje 3 -->
         <article class="card">
           <div class="thumb p3"></div>
@@ -151,9 +156,9 @@
             <h3>Hackchair — Ürün Tasarımı</h3>
             <p class="muted">İkonik sandalye serisi; seri üretim ve özel edisyonlar.</p>
           </div>
-          <a class="link" href="#" target="_blank" rel="noopener">
+          <div class="link" data-open="p3" role="button" tabindex="0" aria-label="Hackchair projesi detayını aç">
             <span>Projeyi Aç</span> →
-          </a>
+          </div>
         </article>
       </div>
     </div>
@@ -163,7 +168,7 @@
   <section id="about" class="section about">
     <div class="container">
       <h2>About</h2>
-      <p>S.S.C. ARCHITECTURE; mimari, iç mekân ve ürün tasarımı üzerine çalışan bir stüdyo. 
+      <p>S.S.C. ARCHITECTURE; mimari, iç mekân ve ürün tasarımı üzerine çalışan bir stüdyo.
       Yaklaşımımız yalın strüktür, malzeme dürüstlüğü ve kullanıcı deneyimini merkeze alan esnek tipolojiler üzerine kurulur.</p>
     </div>
   </section>
@@ -172,7 +177,10 @@
   <section id="contact" class="section">
     <div class="container">
       <h2>Contact</h2>
-      <p class="muted">Mail: <a href="mailto:sultansenacanturk@icloud.com">sultansenacanturk@icloud.com</a> · Instagram: <a href="https://instagram.com/" target="_blank" rel="noopener">@sscarch</a></p>
+      <p class="muted">
+        Mail: <a href="mailto:Sultansenacanturk@gmail.com">Sultansenacanturk@gmail.com</a>
+        · Instagram: <a href="https://instagram.com/" target="_blank" rel="noopener">@sscarch</a>
+      </p>
       <form class="contact" onsubmit="alert('Mesajın alındı! (Demo form)'); return false;">
         <input type="text" placeholder="Ad Soyad" required>
         <input type="email" placeholder="E-posta" required>
@@ -186,8 +194,88 @@
     <div class="container">© <span id="yil"></span> S.S.C. ARCHITECTURE</div>
   </footer>
 
+  <!-- ===== Modals (3 proje) ===== -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header>
+        <div class="head">
+          <strong id="modal-title">Proje Başlığı</strong>
+          <button class="close" aria-label="Kapat" onclick="closeModal()">×</button>
+        </div>
+      </header>
+      <div class="content">
+        <!-- Görsel boş; kendi görselini eklemek istersen inline style ile: style="background-image:url('...')" -->
+        <div class="img" id="modal-img"></div>
+        <div class="body">
+          <p id="modal-text" class="muted">Proje açıklaması burada görünecek.</p>
+          <!-- Dış link istersen buraya URL ekle; boş bırakırsan görünmez -->
+          <p><a id="modal-link" class="btn" style="display:none" target="_blank" rel="noopener">Harici Bağlantı</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Yıl
     document.getElementById('yil').textContent = new Date().getFullYear();
+
+    // Modal verileri
+    const DATA = {
+      p1: {
+        title: 'Beykoz Pazar & Kültür Kompleksi',
+        text: 'Pazar + çarşı + kültür birleşimi; kamusal alan kurgusu, strüktür ve dolaşım şemaları.',
+        // img: 'GÖRSEL_URLSİ', // istersen ekle
+        // link: 'https://...'      // istersen ekle
+      },
+      p2: {
+        title: 'EcoStep — Kundura Studio',
+        text: 'Endüstriyel mirasta sürdürülebilir malzeme ve esnek stüdyo kurgusu.',
+      },
+      p3: {
+        title: 'Hackchair — Ürün Tasarımı',
+        text: 'İkonik sandalye serisi; seri üretim ve özel edisyonlar.',
+      }
+    };
+
+    // Açma kapama
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalText  = document.getElementById('modal-text');
+    const modalImg   = document.getElementById('modal-img');
+    const modalLink  = document.getElementById('modal-link');
+
+    function openModal(key){
+      const d = DATA[key];
+      if(!d) return;
+      modalTitle.textContent = d.title || '';
+      modalText.textContent  = d.text  || '';
+      // Görseli kullanıcı isterse ekleyebilsin
+      modalImg.style.backgroundImage = d.img ? url('${d.img}') : 'none';
+      // Link opsiyonel
+      if(d.link){
+        modalLink.style.display = 'inline-block';
+        modalLink.href = d.link;
+        modalLink.textContent = 'Projeyi görüntüle';
+      }else{
+        modalLink.style.display = 'none';
+      }
+      modal.classList.add('open');
+      document.addEventListener('keydown', escClose);
+      // odak rahatlığı
+      setTimeout(()=>document.querySelector('.modal .close').focus(), 10);
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      document.removeEventListener('keydown', escClose);
+    }
+    function escClose(e){ if(e.key==='Escape') closeModal(); }
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+
+    // Kartlara bağla
+    document.querySelectorAll('[data-open]').forEach(el=>{
+      el.addEventListener('click', ()=> openModal(el.getAttribute('data-open')));
+      el.addEventListener('keydown', (e)=>{ if(e.key==='Enter') openModal(el.getAttribute('data-open')); });
+    });
   </script>
 </body>
 </html>
