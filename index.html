@@ -1,255 +1,125 @@
-<!doctype html>
-<!--
-  S.S.C. ARCHITECTURE - Basit tek sayfa portfolyo
-  Not: Kod kasıtlı olarak "manuel" ve sade tutuldu. Fazla kütüphane yok.
--->
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>S.S.C. ARCHITECTURE — Portfolio</title>
-  <meta name="description" content="S.S.C. ARCHITECTURE | Production · Assembly · Detailing">
-  <!-- Yazı tipi (tek satır, minimal) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lera Center | S.S.C. ARCHITECTURE</title>
   <style>
-    /* === Basit tema değişkenleri (gri / nude) === */
-    :root{
-      --bg:#f4f2ef;     /* arka plan (nude gri) */
-      --paper:#fff;     /* kart zemin */
-      --ink:#1f1f1f;    /* metin */
-      --muted:#6e6b67;  /* ikincil metin */
-      --line:#e6e2dd;   /* ince çizgi */
-      --accent:#b7a696; /* nude vurgu */
-      --overlay:rgba(0,0,0,.45);
+    body {
+      background-color: #f2efec;
+      font-family: Arial, sans-serif;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
-
-    /* Genel reset ve temel görünüm */
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1120px;margin:0 auto;padding:0 20px}
-
-    /* Üst menü (basit) */
-    header{position:sticky;top:0;background:rgba(244,242,239,.9);backdrop-filter:saturate(160%) blur(6px);border-bottom:1px solid var(--line);z-index:10}
-    .nav{height:68px;display:flex;align-items:center;justify-content:space-between}
-    .brand{font-weight:800;letter-spacing:.12em}
-    nav{display:flex;gap:18px}
-    .menu{display:none;border:0;background:transparent;font-size:26px}
-    @media (max-width:860px){
-      nav{display:none;position:absolute;left:0;right:0;top:68px;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 20px;flex-direction:column}
-      nav.open{display:flex}
-      .menu{display:inline-block}
+    header {
+      background-color: #e4ded9;
+      padding: 20px;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
-
-    /* Hero */
-    .hero{padding:84px 0 48px;border-bottom:1px solid var(--line)}
-    .kicker{color:var(--muted);letter-spacing:.22em;text-transform:uppercase;font-size:12px}
-    h1{font-size:44px;line-height:1.15;margin:12px 0 6px}
-    .sub{color:var(--muted);font-size:16px;max-width:760px}
-    .cta{margin-top:16px;display:flex;gap:10px}
-    .btn{display:inline-block;border:1px solid var(--ink);padding:10px 14px;border-radius:10px}
-    .btn.accent{border-color:var(--accent);background:var(--accent);color:#fff;font-weight:700}
-
-    /* Bölüm ve başlıklar */
-    .section{padding:56px 0}
-    .section h2{font-size:22px;margin:0 0 14px}
-
-    /* Proje kartları (3 kolon, mobilde 1) */
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-    @media (max-width:860px){ .grid{grid-template-columns:1fr} }
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-    /* Görseller şimdi boş - sen ekleyeceksin */
-    .thumb{aspect-ratio:16/10;background:#ddd} /* istersen: style="background-image:url('...');background-size:cover;background-position:center" */
-    .card .body{padding:14px}
-    .tag{display:inline-block;font-size:12px;background:var(--accent);color:#fff;padding:4px 8px;border-radius:999px;margin-bottom:8px}
-    .card h3{margin:0 0 6px}
-    .muted{color:var(--muted)}
-    .link{margin-top:auto;padding:12px 14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-
-    /* About / Contact */
-    .about{background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,0))}
-    .about p{max-width:780px}
-    .contact{display:grid;gap:10px;max-width:520px}
-    input,textarea{width:100%;background:#fff;border:1px solid var(--line);padding:10px;border-radius:10px}
-
-    /* Alt bilgi */
-    footer{border-top:1px solid var(--line);padding:22px 0;text-align:center;color:var(--muted)}
-
-    /* Modal (popup) - basit tut */
-    .modal-backdrop{position:fixed;inset:0;background:var(--overlay);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
-    .modal-backdrop.open{display:flex}
-    .modal{max-width:960px;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-    .modal header{background:#fff;border-bottom:1px solid var(--line)}
-    .modal .head{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
-    .modal .close{border:0;background:transparent;font-size:26px;cursor:pointer}
-    .modal .content{display:grid;grid-template-columns:1.1fr .9fr}
-    .modal .img{min-height:320px;background:#ddd} /* istersen: style="background-image:url('...');background-size:cover;background-position:center" */
-    .modal .body{padding:16px}
-    @media (max-width:860px){ .modal .content{grid-template-columns:1fr} .modal .img{aspect-ratio:16/9} }
+    nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 14px;
+    }
+    h1 {
+      margin-top: 40px;
+      font-size: 28px;
+      color: #333;
+    }
+    p {
+      color: #555;
+      max-width: 600px;
+      margin: 10px auto 30px;
+      line-height: 1.5;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      transition: 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+    footer {
+      background-color: #e4ded9;
+      color: #555;
+      padding: 15px;
+      font-size: 13px;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
-  <!-- Üst çubuk -->
+
   <header>
-    <div class="container nav">
-      <div class="brand">S.S.C. ARCHITECTURE</div>
-      <button class="menu" aria-label="Menü" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
+    S.S.C. ARCHITECTURE — LERA CENTER PROJECT
+    <nav>
+      <a href="#about">Hakkında</a>
+      <a href="#gallery">Galeri</a>
+      <a href="mailto:Sultansenacanturk@gmail.com">İletişim</a>
+    </nav>
   </header>
 
-  <!-- Kapak -->
-  <main id="home" class="hero">
-    <div class="container">
-      <div class="kicker">Portfolio</div>
-      <h1>Modern mimari ve ürün tasarımı.</h1>
-      <p class="sub">Production · Assembly · Detailing — İstanbul merkezli mimari ve iç mekân odaklı çalışmalar.</p>
-      <div class="cta">
-        <a class="btn accent" href="#projects">Projeleri Gör</a>
-        <a class="btn" href="#contact">İletişime Geç</a>
-      </div>
-    </div>
-  </main>
-
-  <!-- Projeler -->
-  <section id="projects" class="section">
-    <div class="container">
-      <h2>Seçili Projeler (3)</h2>
-      <div class="grid">
-        <!-- 1) Lera Center — Adidas -->
-        <article class="card">
-          <div class="thumb"></div>
-          <div class="body">
-            <span class="tag">Architecture</span>
-            <h3>Lera Center — Adidas</h3>
-            <p class="muted">Perakende-odaklı merkez kurgusu; dolaşım, cephe ve modüler birim çalışmaları.</p>
-          </div>
-          <div class="link" data-open="p1" role="button" tabindex="0"><span>Projeyi Aç</span> →</div>
-        </article>
-
-        <!-- 2) Galeria Can -->
-        <article class="card">
-          <div class="thumb"></div>
-          <div class="body">
-            <span class="tag">Urban / Mixed-Use</span>
-            <h3>Galeria Can</h3>
-            <p class="muted">Galeria dönüşümü; kamusal açık alanlar, zemin kat ilişkileri ve strüktür.</p>
-          </div>
-          <div class="link" data-open="p2" role="button" tabindex="0"><span>Projeyi Aç</span> →</div>
-        </article>
-
-        <!-- 3) Hackchair — Ürün Tasarımı -->
-        <article class="card">
-          <div class="thumb"></div>
-          <div class="body">
-            <span class="tag">Product</span>
-            <h3>Hackchair — Ürün Tasarımı</h3>
-            <p class="muted">İkonik sandalye serisi; seri üretim ve özel edisyonlar.</p>
-          </div>
-          <div class="link" data-open="p3" role="button" tabindex="0"><span>Projeyi Aç</span> →</div>
-        </article>
-      </div>
-    </div>
+  <section id="about">
+    <h1>LERA CENTER — ADIDAS</h1>
+    <p>
+      Bu proje, kullanıcı deneyimini ve sade strüktürü öne çıkaran bir mimari çalışmadır.
+      Mekânsal düzen, açık alan ilişkisi ve markanın kimliği üzerine geliştirilmiştir.
+    </p>
   </section>
 
-  <!-- Hakkında -->
-  <section id="about" class="section about">
-    <div class="container">
-      <h2>About</h2>
-      <p>S.S.C. ARCHITECTURE; mimari, iç mekân ve ürün tasarımı üzerine çalışan bir stüdyo.
-      Yaklaşım yalın strüktür, malzeme dürüstlüğü ve kullanıcı deneyimini merkeze alan esnek tipolojiler üzerine kurulu.</p>
-    </div>
+  <section id="gallery" class="gallery">
+    <img src="IMG_0487.jpeg" alt="Lera Center 1">
+    <img src="IMG_0488.jpeg" alt="Lera Center 2">
+    <img src="IMG_0489.jpeg" alt="Lera Center 3">
+    <img src="IMG_0490.jpeg" alt="Lera Center 4">
+    <img src="IMG_0491.jpeg" alt="Lera Center 5">
+    <img src="IMG_0492.jpeg" alt="Lera Center 6">
+    <img src="IMG_0493.jpeg" alt="Lera Center 7">
+    <img src="IMG_0494.jpeg" alt="Lera Center 8">
+    <img src="IMG_0495.jpeg" alt="Lera Center 9">
+    <img src="IMG_0496.jpeg" alt="Lera Center 10">
+    <img src="IMG_0497.jpeg" alt="Lera Center 11">
+    <img src="IMG_0498.jpeg" alt="Lera Center 12">
+    <img src="IMG_0499.jpeg" alt="Lera Center 13">
+    <img src="IMG_0500.jpeg" alt="Lera Center 14">
+    <img src="IMG_0501.jpeg" alt="Lera Center 15">
+    <img src="IMG_0502.jpeg" alt="Lera Center 16">
+    <img src="IMG_0503.jpeg" alt="Lera Center 17">
+    <img src="IMG_0504.jpeg" alt="Lera Center 18">
+    <img src="IMG_0505.jpeg" alt="Lera Center 19">
+    <img src="IMG_0506.jpeg" alt="Lera Center 20">
+    <img src="IMG_0507.jpeg" alt="Lera Center 21">
+    <img src="IMG_0508.jpeg" alt="Lera Center 22">
+    <img src="IMG_0509.jpeg" alt="Lera Center 23">
+    <img src="IMG_0510.jpeg" alt="Lera Center 24">
+    <img src="IMG_0511.jpeg" alt="Lera Center 25">
+    <img src="IMG_0512.jpeg" alt="Lera Center 26">
+    <img src="IMG_0513.jpeg" alt="Lera Center 27">
+    <img src="IMG_0514.jpeg" alt="Lera Center 28">
+    <img src="IMG_0515.jpeg" alt="Lera Center 29">
+    <img src="IMG_0516.jpeg" alt="Lera Center 30">
+    <img src="IMG_0517.jpeg" alt="Lera Center 31">
+    <img src="IMG_0518.jpeg" alt="Lera Center 32">
+    <img src="IMG_0519.jpeg" alt="Lera Center 33">
   </section>
 
-  <!-- İletişim -->
-  <section id="contact" class="section">
-    <div class="container">
-      <h2>Contact</h2>
-      <p class="muted">Mail: <a href="mailto:Sultansenacanturk@gmail.com">Sultansenacanturk@gmail.com</a> · Instagram: <a href="https://instagram.com/" target="_blank" rel="noopener">@sscarch</a></p>
-      <form class="contact" onsubmit="alert('Mesajın alındı! (Demo)'); return false;">
-        <input type="text" placeholder="Ad Soyad" required>
-        <input type="email" placeholder="E-posta" required>
-        <textarea rows="4" placeholder="Mesajın"></textarea>
-        <button class="btn accent" type="submit">Gönder</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Alt bilgi -->
   <footer>
-    <div class="container">© <span id="yil"></span> S.S.C. ARCHITECTURE</div>
+    © 2025 S.S.C. ARCHITECTURE — Hazırlayan: Sultan Sena Cantürk
   </footer>
 
-  <!-- Modal (tek kez tanımla, içini JS ile doldur) -->
-  <div class="modal-backdrop" id="modal">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <header>
-        <div class="head">
-          <strong id="modal-title">Proje Başlığı</strong>
-          <button class="close" aria-label="Kapat" onclick="kapat()">×</button>
-        </div>
-      </header>
-      <div class="content">
-        <div class="img" id="modal-img"></div>
-        <div class="body">
-          <p id="modal-text" class="muted">Proje açıklaması burada.</p>
-          <p><a id="modal-link" class="btn" style="display:none" target="_blank" rel="noopener">Harici Bağlantı</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Yıl
-    document.getElementById('yil').textContent = new Date().getFullYear();
-
-    // Basit veri nesnesi (sen istersen burayı düzenlersin)
-    const VERI = {
-      p1:{ baslik:'Lera Center — Adidas', aciklama:'Perakende-odaklı merkez kurgusu; dolaşım, cephe ve modüler birim çalışmaları.' },
-      p2:{ baslik:'Galeria Can', aciklama:'Galeria dönüşümü; kamusal açık alanlar, zemin kat ilişkileri ve strüktür.' },
-      p3:{ baslik:'Hackchair — Ürün Tasarımı', aciklama:'İkonik sandalye serisi; seri üretim ve özel edisyonlar.' }
-      // İstersen img/link ekleyebilirsin: img:'https://...', link:'https://...'
-    };
-
-    const modal = document.getElementById('modal');
-    const mTitle = document.getElementById('modal-title');
-    const mText  = document.getElementById('modal-text');
-    const mImg   = document.getElementById('modal-img');
-    const mLink  = document.getElementById('modal-link');
-
-    function ac(key){
-      const d = VERI[key];
-      if(!d) return;
-      mTitle.textContent = d.baslik || '';
-      mText.textContent  = d.aciklama || '';
-      // görsel eklemek istersen (opsiyonel):
-      mImg.style.backgroundImage = d.img ? "url('"+d.img+"')" : 'none';
-      // dış bağlantı (opsiyonel):
-      if(d.link){ mLink.style.display='inline-block'; mLink.href=d.link; mLink.textContent='Projeyi görüntüle'; }
-      else{ mLink.style.display='none'; mLink.removeAttribute('href'); }
-      modal.classList.add('open');
-      document.addEventListener('keydown', escKapat);
-      setTimeout(()=>document.querySelector('.modal .close').focus(), 30);
-    }
-    function kapat(){
-      modal.classList.remove('open');
-      document.removeEventListener('keydown', escKapat);
-    }
-    function escKapat(e){ if(e.key==='Escape') kapat(); }
-    modal.addEventListener('click', (e)=>{ if(e.target===modal) kapat(); });
-
-    // Kartlardaki "Projeyi Aç" tetikleyicisi
-    document.querySelectorAll('[data-open]').forEach(el=>{
-      el.addEventListener('click', ()=> ac(el.getAttribute('data-open')));
-      el.addEventListener('keydown', (e)=>{ if(e.key==='Enter') ac(el.getAttribute('data-open')); });
-    });
-  </script>
 </body>
 </html>
