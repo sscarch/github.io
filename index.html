@@ -1,114 +1,69 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>S.S.C. ARCHITECTURE</title>
-  <style>
-    body{font-family:Arial,sans-serif;margin:0;background:#f4f2ef;color:#222;text-align:center}
-    header,footer{background:#e6e1db;padding:18px}
-    a{color:#222;text-decoration:none;margin:0 8px}
-    h1{font-size:22px;margin:16px 0}
-    .btn{background:#b6a79b;color:white;border:none;padding:10px 16px;border-radius:6px;cursor:pointer;margin-top:10px}
-    .btn:hover{background:#a39386}
-    .gallery img{width:100%;border-radius:6px;margin-bottom:8px}
-    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;padding:10px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.S.C. ARCHITECTURE</title>
+<style>
+  body { font-family: Arial; background: #f2efec; color: #222; text-align: center; margin: 0; }
+  header { background: #e6e1db; padding: 15px; font-weight: bold; }
+  button { background: #b6a79b; color: #fff; border: none; padding: 8px 12px; margin: 10px; cursor: pointer; }
+  img { width: 90%; max-width: 400px; border-radius: 5px; margin: 5px; }
+</style>
 </head>
 <body>
 
-<header>
-  <b>S.S.C. ARCHITECTURE</b><br>
-  <small>Production · Assembly · Detailing</small><br>
-  <a href="#" onclick="showHome()">Ana Sayfa</a>
-  <a href="#" onclick="showProjects()">Projeler</a>
-  <a href="mailto:Sultansenacanturk@gmail.com">İletişim</a>
-</header>
+<header>S.S.C. ARCHITECTURE</header>
 
-<div id="home">
-  <h1>Hoş Geldiniz</h1>
-  <p>Bu sayfa, S.S.C. ARCHITECTURE projeleri.</p>
+<h2>Lera Center — Adidas</h2>
+<p>Marka kimliğiyle bütünleşen sade bir strüktür anlayışıyla tasarlandı.</p>
+
+<button onclick="document.getElementById('galeri').style.display='block'">Projeyi Gör</button>
+
+<div id="galeri" style="display:none;">
+  <p>Malzeme dürüstlüğü ve açık alan ilişkisi üzerine geliştirilen proje.</p>
+
+  <img src="IMG_0487.jpeg">
+  <img src="IMG_0488.jpeg">
+  <img src="IMG_0489.jpeg">
+  <img src="IMG_0490.jpeg">
+  <img src="IMG_0491.jpeg">
+  <img src="IMG_0492.jpeg">
+  <img src="IMG_0493.jpeg">
+  <img src="IMG_0494.jpeg">
+  <img src="IMG_0495.jpeg">
+  <img src="IMG_0496.jpeg">
+  <img src="IMG_0497.jpeg">
+  <img src="IMG_0498.jpeg">
+  <img src="IMG_0499.jpeg">
+  <img src="IMG_0500.jpeg">
+  <img src="IMG_0501.jpeg">
+  <img src="IMG_0502.jpeg">
+  <img src="IMG_0503.jpeg">
+  <img src="IMG_0504.jpeg">
+  <img src="IMG_0505.jpeg">
+  <img src="IMG_0506.jpeg">
+  <img src="IMG_0507.jpeg">
+  <img src="IMG_0508.jpeg">
+  <img src="IMG_0509.jpeg">
+  <img src="IMG_0510.jpeg">
+  <img src="IMG_0511.jpeg">
+  <img src="IMG_0512.jpeg">
+  <img src="IMG_0513.jpeg">
+  <img src="IMG_0514.jpeg">
+  <img src="IMG_0515.jpeg">
+  <img src="IMG_0516.jpeg">
+  <img src="IMG_0517.jpeg">
+  <img src="IMG_0518.jpeg">
+  <img src="IMG_0519.jpeg">
+
+  <br>
+  <button onclick="document.getElementById('galeri').style.display='none'">Geri Dön</button>
 </div>
 
-<div id="projects" style="display:none">
-  <h1>Projeler</h1>
-  <div>
-    <h3>Lera Center — Adidas</h3>
-    <p>Marka kimliğiyle bütünleşen sade bir strüktür anlayışıyla tasarlandı.</p>
-    <button class="btn" onclick="showLera()">Projeyi Gör</button>
-  </div>
-</div>
-
-<div id="lera" style="display:none">
-  <h1>Lera Center — Detaylar</h1>
-  <p>Bu proje, malzeme dürüstlüğü ve açık alan ilişkisini temel alan sade bir mimari anlayışla tasarlandı.</p>
-
-  <div class="gallery">
-    <img src="IMG_0487.jpeg" alt="">
-    <img src="IMG_0488.jpeg" alt="">
-    <img src="IMG_0489.jpeg" alt="">
-    <img src="IMG_0490.jpeg" alt="">
-    <img src="IMG_0491.jpeg" alt="">
-    <img src="IMG_0492.jpeg" alt="">
-    <img src="IMG_0493.jpeg" alt="">
-    <img src="IMG_0494.jpeg" alt="">
-    <img src="IMG_0495.jpeg" alt="">
-    <img src="IMG_0496.jpeg" alt="">
-    <img src="IMG_0497.jpeg" alt="">
-    <img src="IMG_0498.jpeg" alt="">
-    <img src="IMG_0499.jpeg" alt="">
-    <img src="IMG_0500.jpeg" alt="">
-    <img src="IMG_0501.jpeg" alt="">
-    <img src="IMG_0502.jpeg" alt="">
-    <img src="IMG_0503.jpeg" alt="">
-    <img src="IMG_0504.jpeg" alt="">
-    <img src="IMG_0505.jpeg" alt="">
-    <img src="IMG_0506.jpeg" alt="">
-    <img src="IMG_0507.jpeg" alt="">
-    <img src="IMG_0508.jpeg" alt="">
-    <img src="IMG_0509.jpeg" alt="">
-    <img src="IMG_0510.jpeg" alt="">
-    <img src="IMG_0511.jpeg" alt="">
-    <img src="IMG_0512.jpeg" alt="">
-    <img src="IMG_0513.jpeg" alt="">
-    <img src="IMG_0514.jpeg" alt="">
-    <img src="IMG_0515.jpeg" alt="">
-    <img src="IMG_0516.jpeg" alt="">
-    <img src="IMG_0517.jpeg" alt="">
-    <img src="IMG_0518.jpeg" alt="">
-    <img src="IMG_0519.jpeg" alt="">
-  </div>
-
-  <button class="btn" onclick="backProjects()">Geri Dön</button>
-</div>
-
-<footer>
+<footer style="background:#e6e1db;padding:10px;margin-top:20px;">
   © 2025 S.S.C. ARCHITECTURE — Sultan Sena Cantürk
 </footer>
-
-<script>
-  function showHome(){
-    hideAll();
-    document.getElementById('home').style.display='block';
-  }
-  function showProjects(){
-    hideAll();
-    document.getElementById('projects').style.display='block';
-  }
-  function showLera(){
-    hideAll();
-    document.getElementById('lera').style.display='block';
-  }
-  function backProjects(){
-    hideAll();
-    document.getElementById('projects').style.display='block';
-  }
-  function hideAll(){
-    document.getElementById('home').style.display='none';
-    document.getElementById('projects').style.display='none';
-    document.getElementById('lera').style.display='none';
-  }
-</script>
 
 </body>
 </html>
